@@ -2,6 +2,7 @@ package handler
 
 import (
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 )
@@ -22,5 +23,8 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	image, _ := ioutil.ReadAll(response.Body)
 	defer response.Body.Close()
 	w.Header().Set("Content-Type", "image/png")
-	w.Write(image)
+	_, err := w.Write(image)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
