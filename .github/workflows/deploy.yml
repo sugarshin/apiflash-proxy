@@ -25,6 +25,7 @@ jobs:
     - run: npm ci
     - name: Deploy
       run: |
-        $(npm bin)/vercel --prod -e "${APIFLASH_ACCESS_KEY}"
+        $(npm bin)/vercel --token "${VERCEL_TOKEN}" --prod -e "${APIFLASH_ACCESS_KEY}"
       env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         APIFLASH_ACCESS_KEY: ${{ secrets.APIFLASH_ACCESS_KEY }}
